@@ -1,9 +1,9 @@
-# Pulse Spatie Laravel Backup
+# Pulse Backups
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/:vendor_slug/:package_slug.svg?style=flat-square)](https://packagist.org/packages/:vendor_slug/:package_slug)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/:vendor_slug/:package_slug/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/:vendor_slug/:package_slug/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/:vendor_slug/:package_slug/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/:vendor_slug/:package_slug/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/:vendor_slug/:package_slug.svg?style=flat-square)](https://packagist.org/packages/:vendor_slug/:package_slug)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/monteirofutila/pulse-spatie-laravel-backup.svg?style=flat-square)](https://packagist.org/packages/monteirofutila/pulse-spatie-laravel-backup)
+[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/monteirofutila/pulse-spatie-laravel-backup/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/monteirofutila/pulse-spatie-laravel-backup/actions?query=workflow%3Arun-tests+branch%3Amain)
+[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/monteirofutila/pulse-spatie-laravel-backup/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/monteirofutila/pulse-spatie-laravel-backup/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
+[![Total Downloads](https://img.shields.io/packagist/dt/monteirofutila/pulse-spatie-laravel-backup.svg?style=flat-square)](https://packagist.org/packages/monteirofutila/pulse-spatie-laravel-backup)
 
 A Laravel Pulse card to monitor the health of the backups, and show an overview of all backups managed by the  [Laravel-Backup](https://spatie.be/docs/laravel-backup/) package.
 
