@@ -5,7 +5,7 @@
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/:vendor_slug/:package_slug/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/:vendor_slug/:package_slug/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/:vendor_slug/:package_slug.svg?style=flat-square)](https://packagist.org/packages/:vendor_slug/:package_slug)
 
-A Laravel Pulse card to monitor the health of the backups, and show an overview of all backups.
+A Laravel Pulse card to monitor the health of the backups, and show an overview of all backups managed by the  [Laravel-Backup](https://spatie.be/docs/laravel-backup/) package, in your [Laravel Pulse](https://pulse.laravel.com) dashboard
 
 ## Installation
 
@@ -45,7 +45,7 @@ You also need to be running the <a href="https://laravel.com/docs/10.x/pulse#das
 
 ## Add to your dashboard
 
-To add the card to the Pulse dashboard, you must first <a href="https://laravel.com/docs/10.x/pulse#dashboard-customization"> [publish the vendor view] </a>
+To add the card to the Pulse dashboard, you must first <a href="https://laravel.com/docs/10.x/pulse#dashboard-customization">publish the vendor view</a>
 
 <p style="font-family: 'CustomFont';">Then, you can modify the dashboard.blade.php file: </p>
 
