@@ -8,7 +8,6 @@ use Laravel\Pulse\Livewire\Card;
 
 class Backups extends Card
 {
-
     public function render()
     {
         $backup = Pulse::values('backups')->map(function ($backup, $key) {

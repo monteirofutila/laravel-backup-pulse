@@ -9,7 +9,7 @@ use MonteiroFutila\PulseSpatieLaravelBackup\PulseSpatieLaravelBackup;
 class PulseSpatieLaravelBackupRecorder
 {
     public array $listen = [
-        SharedBeat::class
+        SharedBeat::class,
     ];
 
     public function record(SharedBeat $event): void
