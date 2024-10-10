@@ -1,6 +1,6 @@
 {
     "name": "monteirofutila/pulse-spatie-laravel-backup",
-    "description": "",
+    "description": "A Laravel Pulse card to monitor the health of the backups, and show an overview of all backups",
     "keywords": [
         "Monteiro Futila",
         "laravel",
