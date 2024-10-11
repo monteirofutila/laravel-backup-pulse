@@ -1,6 +1,6 @@
 <?php
 
-namespace MonteiroFutila\PulseSpatieLaravelBackup;
+namespace MonteiroFutila\LaravelBackupPulse;
 
 use Spatie\Backup\BackupDestination\Backup;
 use Spatie\Backup\BackupDestination\BackupDestination;
@@ -9,7 +9,7 @@ use Spatie\Backup\Helpers\Format;
 use Spatie\Backup\Tasks\Monitor\BackupDestinationStatus;
 use Spatie\Backup\Tasks\Monitor\BackupDestinationStatusFactory;
 
-class PulseSpatieLaravelBackup
+class SpatieLaravelBackup
 {
     public static function getDisks(): array
     {
@@ -32,6 +32,17 @@ class PulseSpatieLaravelBackup
         }
 
         return $result;
+    }
+
+    public static function getAllBackupDestinationData(): array
+    {
+        $data = [];
+
+        foreach (self::getDisks() as $disk) {
+            $data = array_merge($data, self::getBackupDestinationData($disk));
+        }
+
+        return $data;
     }
 
     public static function getBackupDestinationData(string $disk): array
@@ -62,7 +73,7 @@ class PulseSpatieLaravelBackup
                     'name' => $backupDestinationStatus->backupDestination()->backupName(),
                     'disk' => $backupDestinationStatus->backupDestination()->diskName(),
                     'reachable' => $backupDestinationStatus->backupDestination()->isReachable(),
-                    'healthy' => Format::emoji($backupDestinationStatus->isHealthy()),
+                    'healthy' => $backupDestinationStatus->isHealthy(),
                     'amount' => $backupDestinationStatus->backupDestination()->backups()->count(),
                     'newest' => $backupDestinationStatus->backupDestination()->newestBackup()
                         ? $backupDestinationStatus->backupDestination()->newestBackup()->date()->diffForHumans()

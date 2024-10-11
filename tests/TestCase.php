@@ -1,8 +1,8 @@
 <?php
 
-namespace MonteiroFutila\PulseSpatieLaravelBackup\Tests;
+namespace MonteiroFutila\LaravelBackupPulse\Tests;
 
-use MonteiroFutila\PulseSpatieLaravelBackup\PulseSpatieLaravelBackupServiceProvider;
+use MonteiroFutila\LaravelBackupPulse\LaravelBackupPulseServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
@@ -10,7 +10,7 @@ class TestCase extends Orchestra
     protected function getPackageProviders($app)
     {
         return [
-            PulseSpatieLaravelBackupServiceProvider::class,
+            LaravelBackupPulseServiceProvider::class,
         ];
     }
 

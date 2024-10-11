@@ -1,12 +1,12 @@
 {
-    "name": "monteirofutila/pulse-spatie-laravel-backup",
+    "name": "monteirofutila/laravel-backup-pulse",
     "description": "",
     "keywords": [
         "Monteiro Futila",
         "laravel",
-        "pulse-spatie-laravel-backup"
+        "laravel-backup-pulse"
     ],
-    "homepage": "https://github.com/monteirofutila/pulse-spatie-laravel-backup",
+    "homepage": "https://github.com/monteirofutila/laravel-backup-pulse",
     "license": "MIT",
     "authors": [
         {
@@ -36,18 +36,18 @@
     },
     "autoload": {
         "psr-4": {
-            "MonteiroFutila\\PulseSpatieLaravelBackup\\": "src/"
+            "MonteiroFutila\\LaravelBackupPulse\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "MonteiroFutila\\PulseSpatieLaravelBackup\\Tests\\": "tests/",
+            "MonteiroFutila\\LaravelBackupPulse\\Tests\\": "tests/",
             "Workbench\\App\\": "workbench/app/"
         }
     },
     "scripts": {
         "post-autoload-dump": "@composer run prepare",
-        "clear": "@php vendor/bin/testbench package:purge-pulse-backup --ansi",
+        "clear": "@php vendor/bin/testbench package:purge-laravel-backup-pulse --ansi",
         "prepare": "@php vendor/bin/testbench package:discover --ansi",
         "build": [
             "@composer run prepare",
@@ -73,7 +73,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "MonteiroFutila\\PulseSpatieLaravelBackup\\PulseSpatieLaravelBackupServiceProvider"
+                "MonteiroFutila\\LaravelBackupPulse\\LaravelBackupPulseServiceProvider"
             ]
         }
     },
