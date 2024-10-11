@@ -11,7 +11,7 @@ class Backups extends Card
     public function render()
     {
         $backups = Pulse::values('backups')->map(function ($backups, $key) {
-            return json_decode($backups->value, JSON_THROW_ON_ERROR);
+            return json_decode($backups->value, flags: JSON_THROW_ON_ERROR);
         });
 
         return View::make('laravel-backup-pulse::livewire.backups', [
