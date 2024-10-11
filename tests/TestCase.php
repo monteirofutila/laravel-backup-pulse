@@ -2,6 +2,7 @@
 
 namespace MonteiroFutila\LaravelBackupPulse\Tests;
 
+use Livewire\LivewireServiceProvider;
 use MonteiroFutila\LaravelBackupPulse\LaravelBackupPulseServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 
@@ -11,6 +12,7 @@ class TestCase extends Orchestra
     {
         return [
             LaravelBackupPulseServiceProvider::class,
+            LivewireServiceProvider::class,
         ];
     }
 
