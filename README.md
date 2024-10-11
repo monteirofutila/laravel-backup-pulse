@@ -1,68 +1,78 @@
-# :package_description
+# Pulse Backups
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/:vendor_slug/:package_slug.svg?style=flat-square)](https://packagist.org/packages/:vendor_slug/:package_slug)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/:vendor_slug/:package_slug/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/:vendor_slug/:package_slug/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/:vendor_slug/:package_slug/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/:vendor_slug/:package_slug/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/:vendor_slug/:package_slug.svg?style=flat-square)](https://packagist.org/packages/:vendor_slug/:package_slug)
-<!--delete-->
----
-This repo can be used to scaffold a Laravel package. Follow these steps to get started:
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/monteirofutila/pulse-spatie-laravel-backup.svg?style=flat-square)](https://packagist.org/packages/monteirofutila/pulse-spatie-laravel-backup)
+[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/monteirofutila/pulse-spatie-laravel-backup/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/monteirofutila/pulse-spatie-laravel-backup/actions?query=workflow%3Arun-tests+branch%3Amain)
+[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/monteirofutila/pulse-spatie-laravel-backup/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/monteirofutila/pulse-spatie-laravel-backup/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
+[![Total Downloads](https://img.shields.io/packagist/dt/monteirofutila/pulse-spatie-laravel-backup.svg?style=flat-square)](https://packagist.org/packages/monteirofutila/pulse-spatie-laravel-backup)
 
-1. Press the "Use this template" button at the top of this repo to create a new repo with the contents of this skeleton.
-2. Run "php ./configure.php" to run a script that will replace all placeholders throughout all the files.
-3. Have fun creating your package.
-4. If you need help creating a package, consider picking up our <a href="https://laravelpackage.training">Laravel Package Training</a> video course.
----
-<!--/delete-->
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
-
-## Support us
-
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/:package_name.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/:package_name)
-
-We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
-
-We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
+A Laravel Pulse card to monitor the health of the backups, and show an overview of all backups managed by the  [Laravel-Backup](https://spatie.be/docs/laravel-backup/) package.
 
 ## Installation
 
 You can install the package via composer:
 
 ```bash
-composer require :vendor_slug/:package_slug
+composer require monteirofutila/pulse-spatie-laravel-backup
 ```
 
-You can publish and run the migrations with:
+Next, you should publish the Pulse configuration and migration files using the vendor:publish Artisan command:
 
 ```bash
-php artisan vendor:publish --tag=":package_slug-migrations"
-php artisan migrate
-```
-
-You can publish the config file with:
-
-```bash
-php artisan vendor:publish --tag=":package_slug-config"
-```
-
-This is the contents of the published config file:
-
-```php
-return [
-];
+php artisan vendor:publish --provider="MonteiroFutila\PulseSpatieLaravelBackup\PulseSpatieLaravelBackupServiceProvider"
 ```
 
 Optionally, you can publish the views using
 
 ```bash
-php artisan vendor:publish --tag=":package_slug-views"
+php artisan vendor:publish --tag="pulse-backup-views"
 ```
 
-## Usage
+## Register the recorder
 
-```php
-$variable = new VendorName\Skeleton();
-echo $variable->echoPhrase('Hello, VendorName!');
+To run the checks you must add the PulseSpatieLaravelBackupRecorder to the pulse.php file.</p>
+
+```diff
+return [
+    // ...
+    
+    'recorders' => [
++        \MonteiroFutila\PulseSpatieLaravelBackup\Recorders\PulseSpatieLaravelBackupRecorder::class => [],
+    ]
+]
+```
+
+You also need to be running the <a href="https://laravel.com/docs/10.x/pulse#dashboard-cards">pulse:check</a> command.
+
+## Add to your dashboard
+
+To add the card to the Pulse dashboard, you must first <a href="https://laravel.com/docs/10.x/pulse#dashboard-customization">publish the vendor view</a>
+
+<p style="font-family: 'CustomFont';">Then, you can modify the dashboard.blade.php file: </p>
+
+```diff
+<x-pulse>
+
++    <livewire:backup cols='6' />
+
+    <livewire:pulse.servers cols="full" />
+
+    <livewire:pulse.usage cols="4" rows="2" />
+
+    <livewire:pulse.queues cols="4" />
+
+    <livewire:pulse.cache cols="4" />
+
+    <livewire:pulse.slow-queries cols="8" />
+
+    <livewire:pulse.exceptions cols="6" />
+
+    <livewire:pulse.slow-requests cols="6" />
+
+    <livewire:pulse.slow-jobs cols="6" />
+
+    <livewire:pulse.slow-outgoing-requests cols="6" />
+
+</x-pulse>
 ```
 
 ## Testing
@@ -85,7 +95,7 @@ Please review [our security policy](../../security/policy) on how to report secu
 
 ## Credits
 
-- [:author_name](https://github.com/:author_username)
+- [Monteiro Futila](https://github.com/monteirofutila)
 - [All Contributors](../../contributors)
 
 ## License
