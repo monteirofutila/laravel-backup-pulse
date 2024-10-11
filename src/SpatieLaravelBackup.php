@@ -4,10 +4,10 @@ namespace MonteiroFutila\LaravelBackupPulse;
 
 use Spatie\Backup\BackupDestination\Backup;
 use Spatie\Backup\BackupDestination\BackupDestination;
-use Spatie\Backup\Config\MonitoredBackupsConfig;
 use Spatie\Backup\Helpers\Format;
 use Spatie\Backup\Tasks\Monitor\BackupDestinationStatus;
 use Spatie\Backup\Tasks\Monitor\BackupDestinationStatusFactory;
+use Illuminate\Support\Facades\Cache;
 
 class SpatieLaravelBackup
 {
@@ -36,13 +36,15 @@ class SpatieLaravelBackup
 
     public static function getAllBackupDestinationData(): array
     {
-        $data = [];
+        return Cache::remember('backup-files', now()->addSeconds(30), function () {
+            $data = [];
 
-        foreach (self::getDisks() as $disk) {
-            $data = array_merge($data, self::getBackupDestinationData($disk));
-        }
+            foreach (self::getDisks() as $disk) {
+                $data = array_merge($data, self::getBackupDestinationData($disk));
+            }
 
-        return $data;
+            return $data;
+        });
     }
 
     public static function getBackupDestinationData(string $disk): array
@@ -62,26 +64,24 @@ class SpatieLaravelBackup
 
     public static function getBackupDestinationStatusData(): array
     {
-        $config = class_exists('Spatie\Backup\Config\MonitoredBackupsConfig')
-            ? MonitoredBackupsConfig::fromArray(config('backup.monitor_backups'))
-            : config('backup.monitor_backups');
-
-        return BackupDestinationStatusFactory::createForMonitorConfig($config)
-            ->map(function (BackupDestinationStatus $backupDestinationStatus, int|string $key) {
-                return [
-                    'id' => $key,
-                    'name' => $backupDestinationStatus->backupDestination()->backupName(),
-                    'disk' => $backupDestinationStatus->backupDestination()->diskName(),
-                    'reachable' => $backupDestinationStatus->backupDestination()->isReachable(),
-                    'healthy' => $backupDestinationStatus->isHealthy(),
-                    'amount' => $backupDestinationStatus->backupDestination()->backups()->count(),
-                    'newest' => $backupDestinationStatus->backupDestination()->newestBackup()
-                        ? $backupDestinationStatus->backupDestination()->newestBackup()->date()->diffForHumans()
-                        : __('No backups present'),
-                    'usedStorage' => Format::humanReadableSize($backupDestinationStatus->backupDestination()->usedStorage()),
-                ];
-            })
-            ->values()
-            ->toArray();
+        return Cache::remember('backup-statuses', now()->addSeconds(30), function () {
+            return BackupDestinationStatusFactory::createForMonitorConfig(config('backup.monitor_backups'))
+                ->map(function (BackupDestinationStatus $backupDestinationStatus, int|string $key) {
+                    return [
+                        'id' => $key,
+                        'name' => $backupDestinationStatus->backupDestination()->backupName(),
+                        'disk' => $backupDestinationStatus->backupDestination()->diskName(),
+                        'reachable' => $backupDestinationStatus->backupDestination()->isReachable(),
+                        'healthy' => $backupDestinationStatus->isHealthy(),
+                        'amount' => $backupDestinationStatus->backupDestination()->backups()->count(),
+                        'newest' => $backupDestinationStatus->backupDestination()->newestBackup()
+                            ? $backupDestinationStatus->backupDestination()->newestBackup()->date()->diffForHumans()
+                            : __('No backups present'),
+                        'usedStorage' => Format::humanReadableSize($backupDestinationStatus->backupDestination()->usedStorage()),
+                    ];
+                })
+                ->values()
+                ->toArray();
+        });
     }
 }
