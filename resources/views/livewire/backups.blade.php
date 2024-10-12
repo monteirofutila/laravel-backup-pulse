@@ -5,39 +5,38 @@
         </x-slot:icon>
     </x-pulse::card-header>
 
-    <x-pulse::scroll :expand="$expand">
-
-        @empty($backups)
-            <x-pulse::no-results />
-        @else
-            {{-- Backup Statuses Summary --}}
-            <x-pulse::table>
-                <x-pulse::thead>
+    @empty($backups)
+        <x-pulse::no-results />
+    @else
+        {{-- Backup Statuses Summary --}}
+        <x-pulse::table>
+            <x-pulse::thead>
+                <tr>
+                    <x-pulse::th>Name</x-pulse::th>
+                    <x-pulse::th>Disk</x-pulse::th>
+                    <x-pulse::th>Healthy</x-pulse::th>
+                    <x-pulse::th>Amount</x-pulse::th>
+                    <x-pulse::th>Newest</x-pulse::th>
+                    <x-pulse::th>Used Storage</x-pulse::th>
+                </tr>
+            </x-pulse::thead>
+            <tbody>
+                @foreach ($backups['backup-statuses'] as $backupStatus)
+                    <tr class="h-2 first:h-0"></tr>
                     <tr>
-                        <x-pulse::th>Name</x-pulse::th>
-                        <x-pulse::th>Disk</x-pulse::th>
-                        <x-pulse::th>Healthy</x-pulse::th>
-                        <x-pulse::th>Amount</x-pulse::th>
-                        <x-pulse::th>Newest</x-pulse::th>
-                        <x-pulse::th>Used Storage</x-pulse::th>
+                        <x-pulse::td>{{ $backupStatus['name'] }}</x-pulse::td>
+                        <x-pulse::td>{{ $backupStatus['disk'] }}</x-pulse::td>
+                        <x-pulse::td>{{ $backupStatus['healthy'] ? '✅' : '❌' }}</x-pulse::td>
+                        <x-pulse::td>{{ $backupStatus['amount'] }}</x-pulse::td>
+                        <x-pulse::td>{{ $backupStatus['newest'] }}</x-pulse::td>
+                        <x-pulse::td>{{ $backupStatus['usedStorage'] }}</x-pulse::td>
                     </tr>
-                </x-pulse::thead>
-                <tbody>
-                    @foreach ($backups['backup-statuses'] as $backupStatus)
-                        <tr class="h-2 first:h-0"></tr>
-                        <tr>
-                            <x-pulse::td>{{ $backupStatus['name'] }}</x-pulse::td>
-                            <x-pulse::td>{{ $backupStatus['disk'] }}</x-pulse::td>
-                            <x-pulse::td>{{ $backupStatus['healthy'] ? '✅' : '❌' }}</x-pulse::td>
-                            <x-pulse::td>{{ $backupStatus['amount'] }}</x-pulse::td>
-                            <x-pulse::td>{{ $backupStatus['newest'] }}</x-pulse::td>
-                            <x-pulse::td>{{ $backupStatus['usedStorage'] }}</x-pulse::td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </x-pulse::table>
+                @endforeach
+            </tbody>
+        </x-pulse::table>
 
-            {{-- Backup Files Summary --}}
+        {{-- Backup Files Summary --}}
+        <x-pulse::scroll :expand="$expand">
             @if (count($backups['files']))
                 <x-pulse::table class="mt-4">
                     <x-pulse::thead>
@@ -63,7 +62,6 @@
             @else
                 <x-pulse::no-results />
             @endif
-        @endempty
-
-    </x-pulse::scroll>
+        </x-pulse::scroll>
+    @endempty
 </x-pulse::card>

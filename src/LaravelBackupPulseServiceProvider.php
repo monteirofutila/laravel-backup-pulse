@@ -12,7 +12,7 @@ class LaravelBackupPulseServiceProvider extends PackageServiceProvider
     public function configurePackage(Package $package): void
     {
         $package
-            ->name('laravel.backup.pulse')
+            ->name('backup-pulse')
             ->hasViews();
     }
 
