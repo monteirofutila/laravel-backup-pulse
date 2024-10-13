@@ -7,9 +7,9 @@ use Laravel\Pulse\Facades\Pulse;
 use Laravel\Pulse\Livewire\Card;
 use Livewire\Attributes\Lazy;
 
+#[Lazy]
 class Backups extends Card
 {
-    #[Lazy]
     public function render()
     {
         $backups = Pulse::values('backups')->map(function ($backups, $key) {

@@ -14,7 +14,7 @@ class LaravelBackupPulseRecorder
 
     public function record(SharedBeat $event): void
     {
-        if ($event->time->minute % 10 !== 0) {
+        if ($event->time->second % 300 !== 0) {
             return;
         }
 
