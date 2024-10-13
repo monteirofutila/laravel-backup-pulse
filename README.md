@@ -7,18 +7,14 @@
 
 A Laravel Pulse card to monitor the health of the backups, and show an overview of all backups managed by the  [Laravel-Backup](https://spatie.be/docs/laravel-backup/) package.
 
+<img alt="Laravel Backup Pulse" src="art/laravel-backup-pulse.png">
+
 ## Installation
 
 You can install the package via composer:
 
 ```bash
 composer require monteirofutila/laravel-backup-pulse
-```
-
-Next, you should publish the Pulse configuration and migration files using the vendor:publish Artisan command:
-
-```bash
-php artisan vendor:publish --provider="MonteiroFutila\LaravelBackupPulse\LaravelBackupPulseServiceProvider"
 ```
 
 Optionally, you can publish the views using
