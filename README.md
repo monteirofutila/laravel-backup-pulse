@@ -25,7 +25,7 @@ php artisan vendor:publish --tag="backup-pulse-views"
 
 ## Register the recorder
 
-To run the checks you must add the PulseSpatieLaravelBackupRecorder to the pulse.php file.</p>
+To run the checks you must add the LaravelBackupPulseRecorder to the pulse.php file.</p>
 
 ```diff
 return [
