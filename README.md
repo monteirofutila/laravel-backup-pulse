@@ -32,7 +32,7 @@ return [
     // ...
     
     'recorders' => [
-+        \MonteiroFutila\LaravelBackupPulse\Recorders\LaravelBackupPulseRecorder::class => [],
++        MonteiroFutila\LaravelBackupPulse\Recorders\LaravelBackupPulseRecorder::class => [],
     ]
 ]
 ```
